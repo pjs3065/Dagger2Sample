@@ -20,4 +20,11 @@ class ExampleUnitTest {
         myComponent.inject(myClass)
         assertEquals("Hello World", myClass.str) //str == hello world
     }
+
+    @Test fun testMemberInjector(){
+        val myClass = MyClass()
+        val myComponent:MyComponent = DaggerMyComponent.create()
+        myComponent.getInjector().injectMembers(myClass)
+        assertEquals("Hello World", myClass.str) //str == hello world
+    }
 }
