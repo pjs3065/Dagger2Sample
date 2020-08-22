@@ -16,12 +16,8 @@ class ExampleUnitTest {
 
     @Test fun testMemberInjection(){
         val myClass = MyClass()
-        var name = myClass.name
-        assertNotNull("조회 결과 null", name) // 널이 아님을 확인
-
         val myComponent:MyComponent = DaggerMyComponent.create()
         myComponent.inject(myClass)
-        name = myClass.name
-        assertEquals("Charles", name) //str == hello world
+        assertEquals("Hello World", myClass.str) //str == hello world
     }
 }
