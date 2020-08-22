@@ -27,4 +27,16 @@ class ExampleUnitTest {
         myComponent.getInjector().injectMembers(myClass)
         assertEquals("Hello World", myClass.str) //str == hello world
     }
+
+    @Test fun testInjection(){
+        val personComponent:PersonComponent = DaggerPersonComponent.create()
+        val personA = personComponent.getPersonA()
+        println("personA's Name : ${personA.name}, personA's Age : ${personA.age}")
+
+        val personB = PersonB()
+        personComponent.inject(personB)
+
+        assertEquals("Charles", personB.name)
+        assertEquals(28, personB.getAge())
+    }
 }
