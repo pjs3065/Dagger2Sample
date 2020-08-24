@@ -11,14 +11,10 @@ import kr.co.pv.dagger2demo.di.module.FrontendModule
 interface MyComponent {
     fun myWidget(): MyWidget
 
-    @Component.Builder
+    @Component.Factory
     interface Builder {
-        //세터 메서드는 반드시 하나의 매개변수만 가져야하고, 반환형으로 void, 빌더, 또는 빌더의 슈퍼 타입
-        fun backendModule(bm: BackendModule): Builder
-        fun frontendModule(fm: FrontendModule): Builder
-
-        @BindsInstance
-        fun foo(foo: Foo)
-        fun build(): MyComponent
+        //팩토리 메소드는 어노테이션에 선언된 속성들을 매개변수로 가지며,
+        // BindInstance 어노테이션 선언된 배개변수는 인스턴스를 넘겨 바인딩한다.
+        fun newInstance(bm:BackendModule, fm:FrontendModule, @BindsInstance foo:Foo):MyComponent
     }
 }
