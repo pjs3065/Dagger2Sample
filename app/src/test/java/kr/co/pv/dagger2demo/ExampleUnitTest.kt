@@ -1,7 +1,7 @@
 package kr.co.pv.dagger2demo
 
-import kr.co.pv.dagger2demo.di.component.DaggerMyComponent
-import kr.co.pv.dagger2demo.di.component.MyComponent
+import kr.co.pv.dagger2demo.di.component.CounterComponent
+import kr.co.pv.dagger2demo.di.component.DaggerCounterComponent
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -14,5 +14,13 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+    @Test
+    fun testLazy(){
+        val component: CounterComponent = DaggerCounterComponent.create()
+        val counter = Counter()
+        component.inject(counter)
+        counter.printLazy()
     }
 }
