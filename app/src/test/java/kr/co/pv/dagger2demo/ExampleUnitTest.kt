@@ -15,11 +15,4 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
-
-    @Test fun testSubInjection(){
-        val childClass = ChildClass()
-        val myComponent: MyComponent = DaggerMyComponent.create()
-        myComponent.inject(childClass)
-        println("a : ${childClass.a}, b : ${childClass.b}")
-    }
 }
