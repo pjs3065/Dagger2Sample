@@ -17,10 +17,11 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testLazy(){
+    fun testProvider(){
         val component: CounterComponent = DaggerCounterComponent.create()
         val counter = Counter()
         component.inject(counter)
-        counter.printLazy()
+        counter.printProvider()
     }
+
 }

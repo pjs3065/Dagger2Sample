@@ -1,17 +1,17 @@
 package kr.co.pv.dagger2demo
 
-import dagger.Lazy
 import javax.inject.Inject
+import javax.inject.Provider
 
 class Counter {
 
     @Inject
-    lateinit var lazy: Lazy<Int>
+    lateinit var provider: Provider<Int>
 
-    fun printLazy(){
+    fun printProvider(){
         println("printing...")
-        println("${lazy.get()}")
-        println("${lazy.get()}")
-        println("${lazy.get()}")
+        println("${provider.get()}")
+        println("${provider.get()}")
+        println("${provider.get()}")
     }
 }
