@@ -1,7 +1,5 @@
 package kr.co.pv.dagger2demo
-
-import kr.co.pv.dagger2demo.di.component.CounterComponent
-import kr.co.pv.dagger2demo.di.component.DaggerCounterComponent
+import kr.co.pv.dagger2demo.di.component.DaggerMyComponent
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -17,11 +15,10 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testProvider(){
-        val component: CounterComponent = DaggerCounterComponent.create()
-        val counter = Counter()
-        component.inject(counter)
-        counter.printProvider()
+    fun testNamed(){
+        val myClass = MyClass()
+        DaggerMyComponent.create().inject(myClass)
+        assertEquals("Hello", myClass.hello)
+        assertEquals("World", myClass.world)
     }
-
 }
