@@ -18,12 +18,7 @@ class ExampleUnitTest {
     @Test
     fun testMultiBindingMap(){
         val foo = Foo()
-        val component: MapComponent = DaggerMapComponent.create()
-
-        val str1 = component.getLongByString()["foo"]
-        val str2 = component.getStringByClass()[foo::class.java]
-
-        println("str1 : $str1")
-        println("str2 : $str2")
+        DaggerMapComponent.create().inject(foo)
+        foo.print()
     }
 }
