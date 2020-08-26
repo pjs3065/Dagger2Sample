@@ -1,6 +1,7 @@
 package kr.co.pv.dagger2demo
-import kr.co.pv.dagger2demo.di.component.DaggerMapComponent
-import kr.co.pv.dagger2demo.di.component.MapComponent
+import kr.co.pv.dagger2demo.di.component.DaggerMapKeyComponent
+import kr.co.pv.dagger2demo.di.component.MapKeyComponent
+import kr.co.pv.dagger2demo.key.Animal
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -17,8 +18,14 @@ class ExampleUnitTest {
 
     @Test
     fun testMultiBindingMap(){
-        val foo = Foo()
-        DaggerMapComponent.create().inject(foo)
-        foo.print()
+       val component : MapKeyComponent = DaggerMapKeyComponent.create()
+        val cat = component.getStringByAnimal()[Animal.CAT]
+        val dog = component.getStringByAnimal()[Animal.DOG]
+
+        val number = component.getStringsByNumber()[Float::class.java]
+
+        println(cat)
+        println(dog)
+        println(number)
     }
 }
