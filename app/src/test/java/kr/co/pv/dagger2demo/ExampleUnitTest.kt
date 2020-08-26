@@ -1,6 +1,5 @@
 package kr.co.pv.dagger2demo
-import kr.co.pv.dagger2demo.di.component.BindComponent
-import kr.co.pv.dagger2demo.di.component.DaggerBindComponent
+import kr.co.pv.dagger2demo.di.component.DaggerSetComponent
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -16,15 +15,9 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testBindsInstance(){
-        val str = "HelloWorld"
+    fun testMultiBinding(){
         val foo = Foo()
-
-        val component: BindComponent = DaggerBindComponent.builder()
-            .setString(str)
-            .build()
-
-        component.inject(foo)
-        assertEquals(str, foo.str)
+        DaggerSetComponent.create().inject(foo)
+        foo.print()
     }
 }
