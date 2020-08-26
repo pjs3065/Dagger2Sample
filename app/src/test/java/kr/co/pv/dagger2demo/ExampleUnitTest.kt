@@ -15,10 +15,13 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testNamed(){
-        val myClass = MyClass()
-        DaggerMyComponent.create().inject(myClass)
-        assertEquals("Hello", myClass.hello)
-        assertEquals("World", myClass.world)
+    fun testSingleton(){
+        val component = DaggerMyComponent.create()
+        val temp1 = component.getAModel()
+        val temp2 = component.getAModel()
+        assertNotNull(temp1)
+        assertNotNull(temp2)
+        println(temp1)
+        println(temp2)
     }
 }
