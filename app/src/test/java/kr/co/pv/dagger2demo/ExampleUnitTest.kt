@@ -1,5 +1,5 @@
 package kr.co.pv.dagger2demo
-import kr.co.pv.dagger2demo.di.component.DaggerMyComponent
+import kr.co.pv.dagger2demo.di.component.DaggerStrComponent
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -15,13 +15,16 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testCustomScope(){
-        val component = DaggerMyComponent.create()
-        val temp1 = component.getAModel()
-        val temp2 = component.getAModel()
-        assertNotNull(temp1)
-        assertNotNull(temp2)
-        println(temp1)
-        println(temp2)
+    fun testFoo(){
+        val foo = Foo()
+
+        DaggerStrComponent.create().inject(foo)
+        println(foo.str.isPresent)
+        println(foo.str.get())
+
+        //오류가 나는데 왜 나는지 모르겠다.
+//        DaggerNoStrComponent.create().inject(foo)
+//        println(foo.str2.isPresent)
+//        println(foo.str.get())
     }
 }
