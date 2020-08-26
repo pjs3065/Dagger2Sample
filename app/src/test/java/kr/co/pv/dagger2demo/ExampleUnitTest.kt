@@ -1,5 +1,6 @@
 package kr.co.pv.dagger2demo
-import kr.co.pv.dagger2demo.di.component.DaggerStrComponent
+import kr.co.pv.dagger2demo.di.component.BindComponent
+import kr.co.pv.dagger2demo.di.component.DaggerBindComponent
 import org.junit.Test
 import org.junit.Assert.*
 
@@ -15,16 +16,15 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testFoo(){
+    fun testBindsInstance(){
+        val str = "HelloWorld"
         val foo = Foo()
 
-        DaggerStrComponent.create().inject(foo)
-        println(foo.str.isPresent)
-        println(foo.str.get())
+        val component: BindComponent = DaggerBindComponent.builder()
+            .setString(str)
+            .build()
 
-        //오류가 나는데 왜 나는지 모르겠다.
-//        DaggerNoStrComponent.create().inject(foo)
-//        println(foo.str2.isPresent)
-//        println(foo.str.get())
+        component.inject(foo)
+        assertEquals(str, foo.str)
     }
 }
