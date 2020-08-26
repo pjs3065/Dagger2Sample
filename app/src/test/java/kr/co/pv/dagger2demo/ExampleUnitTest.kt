@@ -15,7 +15,7 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun testSingleton(){
+    fun testCustomScope(){
         val component = DaggerMyComponent.create()
         val temp1 = component.getAModel()
         val temp2 = component.getAModel()

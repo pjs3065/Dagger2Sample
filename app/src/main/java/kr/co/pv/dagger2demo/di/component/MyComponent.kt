@@ -3,9 +3,9 @@ package kr.co.pv.dagger2demo.di.component
 import dagger.Component
 import kr.co.pv.dagger2demo.di.AModel
 import kr.co.pv.dagger2demo.di.module.MyModule
-import javax.inject.Singleton
+import kr.co.pv.dagger2demo.di.scope.UserScope
 
-@Singleton
+@UserScope
 @Component(modules = [MyModule::class])
 interface MyComponent {
     fun getAModel(): AModel
