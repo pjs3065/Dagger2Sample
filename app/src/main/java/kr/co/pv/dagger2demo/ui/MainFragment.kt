@@ -1,46 +1,46 @@
 package kr.co.pv.dagger2demo.ui
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.AndroidSupportInjection
 import kr.co.pv.dagger2demo.R
-import kr.co.pv.dagger2demo.di.component.MainFragmentComponent
-import kr.co.pv.dagger2demo.di.module.MainFragmentModule
 import javax.inject.Inject
+import javax.inject.Named
 
-class MainFragment : Fragment() {
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+class MainFragment : Fragment(), HasAndroidInjector {
 
     @Inject
-    lateinit var activityName: String
+    @Named("app")
+    lateinit var appString: String
 
-    @JvmField
     @Inject
-    var randomInt: Int = 0
+    @Named("activity")
+    lateinit var activityString: String
 
-    lateinit var component: MainFragmentComponent
+    @Inject
+    @Named("fragment")
+    lateinit var fragmentString: String
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidSupportInjection.inject(this)
+        Log.d("MainFragment", appString)
+        Log.d("MainFragment", activityString)
+        Log.d("MainFragment", fragmentString)
         super.onCreate(savedInstanceState)
-
-        component = (activity as MainActivity).component.mainFragmentComponentBuilder()
-            .setModule(MainFragmentModule())
-            .setFragment(this@MainFragment)
-            .build()
-
-        component.inject(this@MainFragment)
-
-        Log.d("daggerTest","name : $activityName number: $randomInt")
     }
 
     override fun onCreateView(
@@ -48,4 +48,6 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_main, container, false)
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }
